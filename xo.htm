@@ -1,0 +1,109 @@
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>JS</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+        }
+
+        table {
+            margin: auto;
+        }
+
+        table,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+
+        }
+
+        td {
+            text-align: center;
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <table></table>
+
+    <script>
+        let cdv;
+        let x = "X";
+        let o = "O";
+        let say;
+        let M = [];
+        basla();
+
+        function basla() { say = 0; massiv(); qur(); }
+        function massiv() {
+            for (i = 1; i <= 3; i++) {
+                M[i] = [];
+            }
+        }
+        function qur() {
+            cdv = "";
+            for (i = 1; i <= 3; i++) {
+                cdv += '<tr>';
+                for (j = 1; j <= 3; j++) {
+                    M[i][j] = M[i][j] == undefined ? "" : M[i][j];
+                    cdv += '<td onclick="bas(' + i + ',' + j + ')">' + M[i][j] + '</td>';
+                }
+                cdv += '</tr>';
+            }
+            document.getElementsByTagName("table")[0].innerHTML = cdv;
+        }
+
+        function bas(str, stn) {
+            if (M[str][stn] === "") {
+                say++;
+                if (say % 2 != 0) {
+                    M[str][stn] = x;
+                }
+                else {
+                    M[str][stn] = o;
+                }
+
+                qur();
+                yoxla();
+            }
+        }
+
+        function yoxla() {
+            for (var i = 1; i <= 3; i++) {
+
+                if (M[i][1] == M[i][2] && M[i][1] == M[i][3] && M[i][1] != 0) {
+                    alert(M[i][1] + " Wins");
+                    basla();
+                }
+            }
+            for (var i = 1; i <= 3; i++) {
+
+                if (M[1][i] == M[2][i] && M[1][i] == M[3][i] && M[1][i] != 0) {
+                    alert(M[1][i] + " Wins");
+                    basla();
+                }
+            }
+
+            if (M[1][1] == M[2][2] && M[1][1] == M[3][3] && M[1][1] != 0) {
+                alert(M[1][1] + " Wins");
+                basla();
+            }
+
+            if (M[1][3] == M[2][2] && M[1][3] == M[3][1] && M[3][1] != 0) {
+                alert(M[2][2] + " Wins");
+                basla();
+            }
+        }
+
+    </script>
+</body>
+
+</html>
